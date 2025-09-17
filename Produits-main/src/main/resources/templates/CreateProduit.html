@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer un Produit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: url([[@{/images/background.png}]]) no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Gestion des Produits</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/showCreate}">Ajouter un Produit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/ListeProduits}">Lister les Produits</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div layout:fragment="Mycontent">
+
+</div>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card shadow-lg mx-auto" style="max-width: 500px;">
+            <div class="card-body">
+                <h3 class="text-center mb-4">Ajouter un Produit</h3>
+                <form th:action="@{/saveProduit}" method="post" th:object="${produit}">
+                    <div class="mb-3">
+                        <label class="form-label">Nom du Produit :</label>
+                        <input type="text" name="nomProduit" class="form-control"
+                               th:value="${produit.nomProduit}"/>
+                        <span th:errors=${produit.nomProduit} class="text-danger"> </span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Prix :</label>
+                        <input type="text" name="prixProduit" class="form-control"
+                               th:value="${produit.prixProduit}"/>
+                        <span th:errors=${produit.prixProduit} class="text-danger"> </span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date de Création :</label>
+                        <input type="date" name="dateCreation" class="form-control"
+                               th:value="${produit.dateCreation}"/>
+                        <span th:errors=${produit.dateCreation} class="text-danger"> </span>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Ajouter</button>
+                </form>
+                <p class="text-success text-center mt-3" th:text="${msg}"></p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Produits</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Gestion des Produits</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <!-- Menu déroulant Produits -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Produits
+                    </a>
+                    <div class="dropdown-menu">
+                        <!-- Lien visible seulement pour les ADMIN -->
+                        <a sec:authorize="hasRole('ADMIN')" class="dropdown-item" th:href="@{/showCreate}">Ajouter</a>
+                        <!-- Lien visible pour tous -->
+                        <a class="dropdown-item" th:href="@{/ListeProduits}">Lister</a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Menu utilisateur à droite -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span sec:authentication="name"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a sec:authorize="!isAuthenticated()" class="dropdown-item" th:href="@{/login}">Login</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Logout</a>
+                        <a class="dropdown-item" th:href="@{/login}">Profile</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div layout:fragment="Mycontent">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
