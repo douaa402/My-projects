@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Mes demandes de stage</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+    <link rel="icon" th:href="@{/assets/img/kaiadmin/favicon.ico}" type="image/x-icon"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/demo.css}"/>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main-panel">
+            <div class="container">
+                <div class="page-inner">
+                    <h2 class="mb-4">Mes demandes de stage</h2>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped align-middle">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th>Offre</th>
+                                    <th>Date de dépôt</th>
+                                    <th>Statut</th>
+                                    <th>CV</th>
+                                    <th>Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="demande : ${demandes}">
+                                    <td th:text="${demande.offre?.titre}">Titre</td>
+                                    <td th:text="${#temporals.format(demande.dateDemande, 'dd/MM/yyyy HH:mm')}">Date</td>
+                                    <td th:text="${demande.statut}">Statut</td>
+                                    <td>
+                                        <span th:if="${demande.cvFileName != null}">
+											<a th:href="@{'/uploads/cvs/' + ${demande.cvFileName}}" target="_blank">Voir CV</a>
+                                        </span>
+                                        <span th:if="${demande.cvFileName == null}">
+                                            Aucun fichier
+                                        </span>
+                                    </td>
+                                    <td th:text="${demande.message}">Message</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <a href="/etudiant/offres" class="btn btn-secondary mt-3">← Retour aux offres</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

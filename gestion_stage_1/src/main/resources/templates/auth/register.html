@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription - Gestion de Stages</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function afficherChampsSpecifiques() {
+            const role = document.getElementById("role").value;
+            document.getElementById("etudiant-fields").style.display = (role === "ETUDIANT") ? "block" : "none";
+            document.getElementById("encadrant-fields").style.display = (role === "ENCADRANT") ? "block" : "none";
+            document.getElementById("entreprise-fields").style.display = (role === "ENTREPRISE") ? "block" : "none";
+        }
+    </script>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Inscription</h2>
+
+    <form th:action="@{/register}" method="post">
+
+        <div class="form-group">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        </div>
+
+        <div class="form-group">
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Adresse Email :</label>
+            <input type="email" id="email" name="email" placeholder="exemple@email.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirmer le mot de passe :</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmer mot de passe" required>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Je suis :</label>
+            <select id="role" name="role" onchange="afficherChampsSpecifiques()" required>
+                <option value="">-- Sélectionner --</option>
+                <option value="ETUDIANT">Étudiant</option>
+                <option value="ENCADRANT">Encadrant</option>
+                <option value="ENTREPRISE">Entreprise</option>
+            </select>
+        </div>
+
+        <!-- Champs spécifiques pour Étudiant -->
+        <div id="etudiant-fields" style="display:none;">
+            <div class="form-group">
+                <label for="cin">CIN :</label>
+                <input type="text" id="cin" name="cin">
+            </div>
+            <div class="form-group">
+                <label for="niveau">Niveau :</label>
+                <input type="text" id="niveau" name="niveau">
+            </div>
+            <div class="form-group">
+                <label for="specialite">Spécialité :</label>
+                <input type="text" id="specialite" name="specialite">
+            </div>
+        </div>
+
+        <!-- Champs spécifiques pour Encadrant -->
+        <div id="encadrant-fields" style="display:none;">
+            <div class="form-group">
+                <label for="departement">Département :</label>
+                <input type="text" id="departement" name="departement">
+            </div>
+        </div>
+
+        <!-- Champs spécifiques pour Entreprise -->
+        <div id="entreprise-fields" style="display:none;">
+            <div class="form-group">
+                <label for="nomEntreprise">Nom de l'entreprise :</label>
+                <input type="text" id="nomEntreprise" name="nomEntreprise">
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse :</label>
+                <input type="text" id="adresse" name="adresse">
+            </div>
+			<div class="form-group">
+			                <label for="telephone">Telephone :</label>
+			                <input type="tel" id="telephone" name="telephone">
+			</div>
+        </div>
+
+        <button type="submit" class="btn">S'inscrire</button>
+    </form>
+
+    <p>Déjà inscrit ? <a th:href="@{/login}">Se connecter</a></p>
+</div>
+
+</body>
+</html>
